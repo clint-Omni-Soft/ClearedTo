@@ -135,11 +135,11 @@ class ClearedToiPadViewController: UIViewController,
         
         NotificationCenter.default.addObserver( self,
                                                 selector: #selector( keyboardWillShow ),
-                                                name:     Notification.Name.UIKeyboardWillShow,
+                                                name:     UIResponder.keyboardWillShowNotification,
                                                 object:   nil)
         NotificationCenter.default.addObserver( self,
                                                 selector: #selector( keyboardWillHide ),
-                                                name:     Notification.Name.UIKeyboardWillHide,
+                                                name:     UIResponder.keyboardWillHideNotification,
                                                 object:   nil)
         NotificationCenter.default.addObserver( self,
                                                 selector: #selector( showSplashScreen ),
@@ -189,7 +189,7 @@ class ClearedToiPadViewController: UIViewController,
         {
             DispatchQueue.main.async
                 {
-                    self.tailNumberButton.setTitle( withTailNumber, for: UIControlState.normal )
+                    self.tailNumberButton.setTitle( withTailNumber, for: .normal )
                     
                     self.configureBarButtons()
                 }
@@ -243,7 +243,7 @@ class ClearedToiPadViewController: UIViewController,
             NSLog( "%@:%@[%d] - [ %@ ][ %@ ]", description(), #function, #line, stringForBool( boolValue: didSelectDeparture ), fromAirport )
             DispatchQueue.main.async
                 {
-                    self.departureAirportButton.setTitle( fromAirport, for: UIControlState.normal )
+                    self.departureAirportButton.setTitle( fromAirport, for: .normal )
                     self.configureBarButtons()
                 }
             
@@ -261,7 +261,7 @@ class ClearedToiPadViewController: UIViewController,
             NSLog( "%@:%@[%d] - [ %@ ][ %@ ]", description(), #function, #line, stringForBool( boolValue: didSelectDestination ), toAirport )
             DispatchQueue.main.async
                 {
-                    self.destinationAirportButton.setTitle( toAirport, for: UIControlState.normal )
+                    self.destinationAirportButton.setTitle( toAirport, for: .normal )
                     self.configureBarButtons()
                 }
             
@@ -321,7 +321,7 @@ class ClearedToiPadViewController: UIViewController,
 
     
         // Responding to Display Mode Changes
-    func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewControllerDisplayMode )
+    func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewController.DisplayMode )
     {
 //        NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         DispatchQueue.main.async
@@ -444,13 +444,13 @@ class ClearedToiPadViewController: UIViewController,
                                                                          dateStyle: DateFormatter.Style.short,
                                                                          timeStyle: DateFormatter.Style.short )
         
-        clearance.append( departureAirportButton.title( for: UIControlState.normal )! )
+        clearance.append( departureAirportButton.title( for: .normal )! )
         clearance.append( departureFrequencyTextField.text! )
-        clearance.append( destinationAirportButton.title( for: UIControlState.normal )! )
+        clearance.append( destinationAirportButton.title( for: .normal )! )
         clearance.append( expectedAltitudeTextField.text! )
         clearance.append( initialAltitudeTextField.text! )
         clearance.append( myRouteTextView.text! )
-        clearance.append( tailNumberButton.title( for: UIControlState.normal )! )
+        clearance.append( tailNumberButton.title( for: .normal )! )
         clearance.append( timeToExpectedAltitudeTextField.text! )
         clearance.append( transponderCodeTextField.text! )
         clearance.append( formattedDate )
@@ -551,9 +551,9 @@ class ClearedToiPadViewController: UIViewController,
     
     @IBAction func departureButtonTouched(_ sender: UIButton )
     {
-        let         buttonEnabled  = ( ( GlobalConstants.EMPTY_STRING != departureAirportButton  .title( for: UIControlState.normal ) ) &&
-                                       ( GlobalConstants.EMPTY_STRING != destinationAirportButton.title( for: UIControlState.normal ) ) &&
-                                       ( GlobalConstants.EMPTY_STRING != tailNumberButton        .title( for: UIControlState.normal ) ) )
+        let         buttonEnabled  = ( ( GlobalConstants.EMPTY_STRING != departureAirportButton  .title( for: .normal ) ) &&
+                                       ( GlobalConstants.EMPTY_STRING != destinationAirportButton.title( for: .normal ) ) &&
+                                       ( GlobalConstants.EMPTY_STRING != tailNumberButton        .title( for: .normal ) ) )
         if buttonEnabled
         {
             NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
@@ -579,10 +579,10 @@ class ClearedToiPadViewController: UIViewController,
     
     @IBAction func destinationButtonTouched(_ sender: UIButton )
     {
-        if GlobalConstants.EMPTY_STRING != destinationAirportButton.title( for: UIControlState.normal )
+        if GlobalConstants.EMPTY_STRING != destinationAirportButton.title( for: .normal )
         {
             NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-            addTextToRoute( additionalText: String( format: "%@ ", destinationAirportButton.title( for: UIControlState.normal )! ) )
+            addTextToRoute( additionalText: String( format: "%@ ", destinationAirportButton.title( for: .normal )! ) )
         }
         else
         {
@@ -980,17 +980,17 @@ class ClearedToiPadViewController: UIViewController,
     func firstEmptyField() -> Int
     {
 //        NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        if ( GlobalConstants.EMPTY_STRING == tailNumberButton.title(for: UIControlState.normal ) )
+        if ( GlobalConstants.EMPTY_STRING == tailNumberButton.title(for: .normal ) )
         {
             return GlobalConstants.Clearances.eTailNumber;
         }
         
-        if ( GlobalConstants.EMPTY_STRING == departureAirportButton.title( for: UIControlState.normal ) )
+        if ( GlobalConstants.EMPTY_STRING == departureAirportButton.title( for: .normal ) )
         {
             return GlobalConstants.Clearances.eDepartureAirport;
         }
         
-        if ( GlobalConstants.EMPTY_STRING == destinationAirportButton.title(for: UIControlState.normal ) )
+        if ( GlobalConstants.EMPTY_STRING == destinationAirportButton.title(for: .normal ) )
         {
             return GlobalConstants.Clearances.eDestinationAirport;
         }
@@ -1035,9 +1035,9 @@ class ClearedToiPadViewController: UIViewController,
         {
             let     lastClearance = recentClearances?[0];
             
-            departureAirportButton  .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureAirport,   clearance: lastClearance! ), for: UIControlState.normal )
-            destinationAirportButton.setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDestinationAirport, clearance: lastClearance! ), for: UIControlState.normal )
-            tailNumberButton        .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eTailNumber,         clearance: lastClearance! ), for: UIControlState.normal )
+            departureAirportButton  .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureAirport,   clearance: lastClearance! ), for: .normal )
+            destinationAirportButton.setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDestinationAirport, clearance: lastClearance! ), for: .normal )
+            tailNumberButton        .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eTailNumber,         clearance: lastClearance! ), for: .normal )
             
             departureFrequencyTextField     .text = titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureFrequency,     clearance: lastClearance! )
             expectedAltitudeTextField       .text = titleForElement( itemIndex: GlobalConstants.Clearances.eExpectedAltitude,       clearance: lastClearance! )
@@ -1087,9 +1087,9 @@ class ClearedToiPadViewController: UIViewController,
     func resetControls()
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        departureAirportButton  .setTitle( GlobalConstants.EMPTY_STRING, for: UIControlState.normal )
-        destinationAirportButton.setTitle( GlobalConstants.EMPTY_STRING, for: UIControlState.normal )
-        tailNumberButton        .setTitle( GlobalConstants.EMPTY_STRING, for: UIControlState.normal )
+        departureAirportButton  .setTitle( GlobalConstants.EMPTY_STRING, for: .normal )
+        destinationAirportButton.setTitle( GlobalConstants.EMPTY_STRING, for: .normal )
+        tailNumberButton        .setTitle( GlobalConstants.EMPTY_STRING, for: .normal )
         
         departureFrequencyTextField     .text = GlobalConstants.EMPTY_STRING
         expectedAltitudeTextField       .text = GlobalConstants.EMPTY_STRING
@@ -1135,7 +1135,7 @@ class ClearedToiPadViewController: UIViewController,
             let     vc = viewController as! AirportDeparturesViewController
 
             vc.delegate                  = self
-            vc.departureAirport          = departureAirportButton.title( for: UIControlState.normal )
+            vc.departureAirport          = departureAirportButton.title( for: .normal )
             vc.useLastDepartureSelection = lastButtonTouchWasDeparture
         }
         else if storyboardId == STORYBOARD_ID_HEADING

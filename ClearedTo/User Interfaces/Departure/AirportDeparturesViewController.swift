@@ -59,7 +59,7 @@ class AirportDeparturesViewController: UIViewController,
 
         title = String( format: "%@ Departures", departureAirport )
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: .add,
                                                                   target: self,
                                                                   action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize(width: 240, height: 400 )
@@ -207,7 +207,7 @@ class AirportDeparturesViewController: UIViewController,
 //        NSLog( "%@:%@[%d] - selectedElement[ %d ]", description(), #function, #line, departureExtArray.indexOfSelectedElement )
 
         cell.textLabel?.text = departureExtArray.elementAt( index: indexPath.row )
-        cell.accessoryType   = ( ( indexPath.row == departureExtArray.indexOfSelectedElement ) ? UITableViewCellAccessoryType.detailDisclosureButton : UITableViewCellAccessoryType.none )
+        cell.accessoryType   = ( ( indexPath.row == departureExtArray.indexOfSelectedElement ) ? .detailDisclosureButton : .none )
         
         return cell
     }
@@ -228,7 +228,7 @@ class AirportDeparturesViewController: UIViewController,
     
     
     func tableView(_          tableView: UITableView,
-                    commit editingStyle: UITableViewCellEditingStyle,
+                    commit editingStyle: UITableViewCell.EditingStyle,
                      forRowAt indexPath: IndexPath )
     {
         if editingStyle == .delete

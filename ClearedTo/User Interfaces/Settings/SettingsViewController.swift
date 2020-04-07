@@ -37,10 +37,10 @@ class SettingsViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         super.viewDidLoad()
         
-        let     aboutButton = UIButton.init( type: UIButtonType.infoLight )
+        let     aboutButton = UIButton.init( type: .infoLight )
         
         title = "Settings"
-        aboutButton.addTarget( self, action: #selector( aboutButtonTouched ), for: UIControlEvents.touchUpInside )
+        aboutButton.addTarget( self, action: #selector( aboutButtonTouched ), for: .touchUpInside )
         navigationItem.rightBarButtonItem = UIBarButtonItem.init( customView: aboutButton )
         
         cellTitleArray    = [GlobalConstants.UserDefaults.KEY_AIRCRAFT, GlobalConstants.UserDefaults.KEY_AIRPORTS, GlobalConstants.UserDefaults.KEY_DEPARTURES]

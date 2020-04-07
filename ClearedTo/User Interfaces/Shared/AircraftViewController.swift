@@ -46,7 +46,7 @@ class AircraftViewController: UIViewController,
 
         title = "Aircraft"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: .add,
                                                                   target: self,
                                                                   action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize( width: 240, height: 400 )
@@ -113,9 +113,9 @@ class AircraftViewController: UIViewController,
     @IBAction func plusButtonTapped(_ sender: UIBarButtonItem )
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        let     alert        = UIAlertController.init( title: "Add New Aircraft", message: "Enter tail number:", preferredStyle: UIAlertControllerStyle.alert )
-        let     cancelAction = UIAlertAction.init( title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil )
-        let     okAction     = UIAlertAction.init( title: "OK",     style: UIAlertActionStyle.default )
+        let     alert        = UIAlertController.init( title: "Add New Aircraft", message: "Enter tail number:", preferredStyle: .alert )
+        let     cancelAction = UIAlertAction.init( title: "Cancel", style: .cancel, handler: nil )
+        let     okAction     = UIAlertAction.init( title: "OK",     style: .default )
         {
             ( alertAction ) in
             
@@ -165,11 +165,11 @@ class AircraftViewController: UIViewController,
         let     cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
         
         cell.textLabel?.text = aircraftExtArray.elementAt( index: indexPath.row )
-        cell.accessoryType   = UITableViewCellAccessoryType.none
+        cell.accessoryType   = .none
 
         if !fromSettings && ( indexPath.row == aircraftExtArray.indexOfSelectedElement )
         {
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = .checkmark
         }
         
         return cell
@@ -194,7 +194,7 @@ class AircraftViewController: UIViewController,
     
     
     func tableView(_           tableView: UITableView,
-                     commit editingStyle: UITableViewCellEditingStyle,
+                     commit editingStyle: UITableViewCell.EditingStyle,
                       forRowAt indexPath: IndexPath )
     {
         if editingStyle == .delete

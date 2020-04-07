@@ -53,7 +53,7 @@ class DepartureViewController: UIViewController,
 
         title = "Departures"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: .add,
                                                                   target: self,
                                                                   action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize( width: 240, height: 400 )
@@ -144,9 +144,9 @@ class DepartureViewController: UIViewController,
     @IBAction func plusButtonTapped(_ sender: UIBarButtonItem )
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        let     alert        = UIAlertController.init( title: "Add New Departure", message: "Enter descriptor:", preferredStyle:  UIAlertControllerStyle.alert )
-        let     cancelAction = UIAlertAction.init( title: "Cancel", style:   UIAlertActionStyle.cancel, handler: nil )
-        let     okAction     = UIAlertAction.init( title: "OK",     style: UIAlertActionStyle.default )
+        let     alert        = UIAlertController.init( title: "Add New Departure", message: "Enter descriptor:", preferredStyle:  .alert )
+        let     cancelAction = UIAlertAction.init( title: "Cancel", style: .cancel, handler: nil )
+        let     okAction     = UIAlertAction.init( title: "OK",     style: .default )
         {
             ( alertAction ) in
             
@@ -196,11 +196,11 @@ class DepartureViewController: UIViewController,
         let     cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
         
         cell.textLabel?.text = departureExtArray.elementAt( index:  indexPath.row )
-        cell.accessoryType   = UITableViewCellAccessoryType.none
+        cell.accessoryType   = .none
 
         if !fromSettings && ( indexPath.row == departureExtArray.indexOfSelectedElement )
         {
-            cell.accessoryType = UITableViewCellAccessoryType.detailDisclosureButton
+            cell.accessoryType = .detailDisclosureButton
         }
         
         return cell
@@ -225,7 +225,7 @@ class DepartureViewController: UIViewController,
     
     
     func tableView(_          tableView: UITableView,
-                    commit editingStyle: UITableViewCellEditingStyle,
+                    commit editingStyle: UITableViewCell.EditingStyle,
                      forRowAt indexPath: IndexPath )
     {
         if editingStyle == .delete

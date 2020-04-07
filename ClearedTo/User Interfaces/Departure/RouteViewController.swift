@@ -86,7 +86,7 @@ class RouteViewController: UIViewController,
     
         NotificationCenter.default.addObserver( self,
                                                 selector: #selector( RouteViewController.keyboardDidShow( notification: )  ),
-                                                name:     NSNotification.Name.UIKeyboardDidShow,
+                                                name:     UIResponder.keyboardDidShowNotification,
                                                 object:   nil )
     }
     
@@ -419,8 +419,8 @@ class RouteViewController: UIViewController,
     
     func configureBarButtonItems()
     {
-        let     cancelBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector( cancelBarButtonItemTouched ) )
-        let     clearBarButtonItem  = UIBarButtonItem.init( title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector( clearBarButtonItemTouched  ) )
+        let     cancelBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: .cancel, target: self, action: #selector( cancelBarButtonItemTouched ) )
+        let     clearBarButtonItem  = UIBarButtonItem.init( title: "Clear", style: .plain, target: self, action: #selector( clearBarButtonItemTouched  ) )
 
         navigationItem.rightBarButtonItems = [clearBarButtonItem, cancelBarButtonItem]
     }

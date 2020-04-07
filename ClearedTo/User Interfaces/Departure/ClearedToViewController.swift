@@ -71,7 +71,7 @@ class ClearedToViewController: UIViewController,
                                                 object:   nil )
         NotificationCenter.default.addObserver( self,
                                                 selector: #selector( ClearedToViewController.keyboardWillShow( notification: ) ),
-                                                name:     NSNotification.Name.UIKeyboardWillShow,
+                                                name:     UIResponder.keyboardWillShowNotification,
                                                 object:   nil )
         
         myTimer = Timer.scheduledTimer( timeInterval: TIMER_INTERVAL,
@@ -124,7 +124,7 @@ class ClearedToViewController: UIViewController,
         {
             DispatchQueue.main.async
                 {
-                    self.tailNumberButton.setTitle( withTailNumber, for: UIControlState.normal )
+                    self.tailNumberButton.setTitle( withTailNumber, for: .normal )
                     self.configureBarButtons()
                     self.configureRouteButton()
                 }
@@ -146,7 +146,7 @@ class ClearedToViewController: UIViewController,
         {
             DispatchQueue.main.async
                 {
-                    self.departureAirportButton.setTitle( fromAirport, for: UIControlState.normal )
+                    self.departureAirportButton.setTitle( fromAirport, for: .normal )
                     self.configureBarButtons()
                     self.configureRouteButton()
                 }
@@ -165,7 +165,7 @@ class ClearedToViewController: UIViewController,
         {
             DispatchQueue.main.async
                 {
-                    self.destinationAirportButton.setTitle( toAirport, for: UIControlState.normal )
+                    self.destinationAirportButton.setTitle( toAirport, for: .normal )
                     self.configureBarButtons()
                     self.configureRouteButton()
                 }
@@ -272,13 +272,13 @@ class ClearedToViewController: UIViewController,
         var     recentClearancesArray   = [[String]].init()
         let     formattedDate           = DateFormatter.localizedString( from: Date.init(), dateStyle: DateFormatter.Style.short, timeStyle: DateFormatter.Style.short )
         
-        clearance.append( departureAirportButton.title( for: UIControlState.normal )! )
+        clearance.append( departureAirportButton.title( for: .normal )! )
         clearance.append( departureFrequencyTextField.text! )
-        clearance.append( destinationAirportButton.title( for: UIControlState.normal )! )
+        clearance.append( destinationAirportButton.title( for: .normal )! )
         clearance.append( expectedAltitudeTextField.text! )
         clearance.append( initialAltitudeTextField.text! )
         clearance.append( route.text! )
-        clearance.append( tailNumberButton.title( for: UIControlState.normal )! )
+        clearance.append( tailNumberButton.title( for: .normal )! )
         clearance.append( timeToExpectedAltitudeTextField.text! )
         clearance.append( transponderCodeTextField.text! )
         clearance.append( formattedDate )
@@ -490,9 +490,9 @@ class ClearedToViewController: UIViewController,
     func configureRouteButton()
     {
 //        NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        routeButton.isEnabled = ( ( GlobalConstants.EMPTY_STRING != departureAirportButton  .title( for: UIControlState.normal ) ) &&
-                                  ( GlobalConstants.EMPTY_STRING != destinationAirportButton.title( for: UIControlState.normal ) ) &&
-                                  ( GlobalConstants.EMPTY_STRING != tailNumberButton        .title( for: UIControlState.normal ) ) );
+        routeButton.isEnabled = ( ( GlobalConstants.EMPTY_STRING != departureAirportButton  .title( for: .normal ) ) &&
+                                  ( GlobalConstants.EMPTY_STRING != destinationAirportButton.title( for: .normal ) ) &&
+                                  ( GlobalConstants.EMPTY_STRING != tailNumberButton        .title( for: .normal ) ) );
     }
     
     
@@ -550,8 +550,8 @@ class ClearedToViewController: UIViewController,
         if ( !emptyFieldName.isEmpty )
         {
             let errorMessage = "The " + emptyFieldName + " field cannot be left blank"
-            let alert        = UIAlertController.init( title: "Save Clearance Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert )
-            let okAction     = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.default, handler: nil )
+            let alert        = UIAlertController.init( title: "Save Clearance Error", message: errorMessage, preferredStyle: .alert )
+            let okAction     = UIAlertAction.init(title: "OK", style: .default, handler: nil )
             
             alert.addAction( okAction )
             
@@ -581,17 +581,17 @@ class ClearedToViewController: UIViewController,
     func firstEmptyField() -> Int
     {
 //        NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        if ( GlobalConstants.EMPTY_STRING == tailNumberButton.title(for: UIControlState.normal ) )
+        if ( GlobalConstants.EMPTY_STRING == tailNumberButton.title(for: .normal ) )
         {
             return GlobalConstants.Clearances.eTailNumber;
         }
         
-        if ( GlobalConstants.EMPTY_STRING == departureAirportButton.title( for: UIControlState.normal ) )
+        if ( GlobalConstants.EMPTY_STRING == departureAirportButton.title( for: .normal ) )
         {
             return GlobalConstants.Clearances.eDepartureAirport;
         }
     
-        if ( GlobalConstants.EMPTY_STRING == destinationAirportButton.title(for: UIControlState.normal ) )
+        if ( GlobalConstants.EMPTY_STRING == destinationAirportButton.title(for: .normal ) )
         {
             return GlobalConstants.Clearances.eDestinationAirport;
         }
@@ -636,9 +636,9 @@ class ClearedToViewController: UIViewController,
         {
             let     lastClearance = recentClearances?[0];
             
-            departureAirportButton  .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureAirport,   clearance: lastClearance! ), for: UIControlState.normal )
-            destinationAirportButton.setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDestinationAirport, clearance: lastClearance! ), for: UIControlState.normal )
-            tailNumberButton        .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eTailNumber,         clearance: lastClearance! ), for: UIControlState.normal )
+            departureAirportButton  .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureAirport,   clearance: lastClearance! ), for: .normal )
+            destinationAirportButton.setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDestinationAirport, clearance: lastClearance! ), for: .normal )
+            tailNumberButton        .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eTailNumber,         clearance: lastClearance! ), for: .normal )
             
             departureFrequencyTextField     .text = titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureFrequency,     clearance: lastClearance! )
             expectedAltitudeTextField       .text = titleForElement( itemIndex: GlobalConstants.Clearances.eExpectedAltitude,       clearance: lastClearance! )
@@ -683,8 +683,8 @@ class ClearedToViewController: UIViewController,
 
             vcRoute.delegate           = self
             vcRoute.beginningRoute     = route.text;
-            vcRoute.departureAirport   = departureAirportButton  .title( for: UIControlState.normal )
-            vcRoute.destinationAirport = destinationAirportButton.title( for: UIControlState.normal )
+            vcRoute.departureAirport   = departureAirportButton  .title( for: .normal )
+            vcRoute.destinationAirport = destinationAirportButton.title( for: .normal )
         }
         else if segue.identifier == SEGUE_ID_WELCOME
         {
@@ -700,9 +700,9 @@ class ClearedToViewController: UIViewController,
     func resetControls()
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        departureAirportButton  .setTitle( GlobalConstants.EMPTY_STRING, for: UIControlState.normal )
-        destinationAirportButton.setTitle( GlobalConstants.EMPTY_STRING, for: UIControlState.normal )
-        tailNumberButton        .setTitle( GlobalConstants.EMPTY_STRING, for: UIControlState.normal )
+        departureAirportButton  .setTitle( GlobalConstants.EMPTY_STRING, for: .normal )
+        destinationAirportButton.setTitle( GlobalConstants.EMPTY_STRING, for: .normal )
+        tailNumberButton        .setTitle( GlobalConstants.EMPTY_STRING, for: .normal )
         
         departureFrequencyTextField     .text = GlobalConstants.EMPTY_STRING
         expectedAltitudeTextField       .text = GlobalConstants.EMPTY_STRING
