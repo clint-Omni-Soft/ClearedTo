@@ -97,13 +97,16 @@ class WelcomeViewController: UIViewController
         let     screenBounds  = UIScreen.main.bounds
         let     screenScale   = UIScreen.main.scale
         
-        
         if dismissWithTimer!
         {
             let deviceOrientation = UIDevice.current.orientation
             
             // OK, we are showing the Splash Screen (Full Screen)
-            Timer.scheduledTimer( timeInterval: SPLASH_DURATION, target: self, selector: #selector( dismissWithTimer( theTimer: ) ), userInfo: nil, repeats: false )
+            Timer.scheduledTimer( timeInterval: SPLASH_DURATION,
+                                  target: self,
+                                  selector: #selector( dismissWithTimer( theTimer: ) ),
+                                  userInfo: nil,
+                                  repeats: false )
             
             if .pad == UIDevice.current.userInterfaceIdiom
             {
@@ -153,11 +156,9 @@ class WelcomeViewController: UIViewController
             
         }
         
-        
         let     imageFilePath = Bundle.main.path( forResource: imageFileName, ofType: "png" )
         let     imageFileURL  = URL.init( fileURLWithPath: imageFilePath! )
         var     myImageData: Data!
-        
         
         do
         {
@@ -170,7 +171,5 @@ class WelcomeViewController: UIViewController
         }
         
     }
-
-    
 
 }

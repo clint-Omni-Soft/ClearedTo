@@ -180,7 +180,9 @@ class ClearedToiPadViewController: UIViewController,
     
     // MARK: AircraftViewControllerDelegate Methods
     
-    func aircraftViewController( aircraftViewController: AircraftViewController, didSelectAircraft: Bool, withTailNumber: String )
+    func aircraftViewController( aircraftViewController: AircraftViewController,
+                                 didSelectAircraft: Bool,
+                                 withTailNumber: String )
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         if didSelectAircraft
@@ -302,7 +304,6 @@ class ClearedToiPadViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_WELCOME )
 
-        
         splitViewController?.present( myViewController,
                                       animated: true,
                                       completion: nil )
@@ -339,7 +340,6 @@ class ClearedToiPadViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_AIRCRAFT )
         
-        
         present( viewController: myViewController,
                  inNavigationController: true,
                  fromButton: sender )
@@ -362,15 +362,12 @@ class ClearedToiPadViewController: UIViewController,
             return
         }
         
-        
         var     indexOfSpace = GlobalConstants.NO_SELECTION
-        
         
         for index in ( 1...( myRouteTextView.text.count - 2 ) ).reversed()
         {
             let     offset = myRouteTextView.text.index( myRouteTextView.text.startIndex,
                                                          offsetBy: index )
-            
             if " " == myRouteTextView.text[offset]
             {
                 indexOfSpace = index
@@ -400,10 +397,8 @@ class ClearedToiPadViewController: UIViewController,
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         airportsMode = AirportModes.eShowDeparture
-
         
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_AIRPORTS )
-        
         
         present( viewController: myViewController,
                  inNavigationController: true,
@@ -415,10 +410,8 @@ class ClearedToiPadViewController: UIViewController,
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         airportsMode = AirportModes.eShowDestination
-
         
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_AIRPORTS )
-        
         
         present( viewController: myViewController,
                  inNavigationController: true,
@@ -430,7 +423,6 @@ class ClearedToiPadViewController: UIViewController,
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_HEADING )
-  
         
         present( viewController: myViewController,
                  inNavigationController: false,
@@ -445,7 +437,6 @@ class ClearedToiPadViewController: UIViewController,
         {
             return
         }
-        
         
         var     clearance               = [String].init()
         var     recentClearancesArray   = [[String]].init()
@@ -463,7 +454,6 @@ class ClearedToiPadViewController: UIViewController,
         clearance.append( timeToExpectedAltitudeTextField.text! )
         clearance.append( transponderCodeTextField.text! )
         clearance.append( formattedDate )
-        
         
         if let object = UserDefaults.standard.object( forKey: GlobalConstants.UserDefaults.KEY_RECENT_CLEARANCES )
         {
@@ -568,7 +558,6 @@ class ClearedToiPadViewController: UIViewController,
         {
             NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
             let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_AIRPORT_DEPARTURES )
-            
             
             present( viewController: myViewController, inNavigationController: true, fromButton: sender )
         }
@@ -735,7 +724,6 @@ class ClearedToiPadViewController: UIViewController,
     {
         let     stringLength = myRouteTextView.text.count
         
-        
         if 0 != stringLength
         {
             if ( " " != ( myRouteTextView.text as NSString ).substring( to: stringLength - 1 ) )
@@ -749,9 +737,7 @@ class ClearedToiPadViewController: UIViewController,
         currentDeleteButton.isHidden = false
         lastButtonTouchWasDeparture  = false
         
-        
         let overflow = myRouteTextView.contentSize.height - myRouteTextView.frame.size.height
-        
         
         // Although we'll let the user scroll around in our text view,
         // we want the last line to always be displayed after he hits a soft-key
@@ -773,7 +759,6 @@ class ClearedToiPadViewController: UIViewController,
 //        NSLog( "%@:%@[%d] - %@", description(), #function, #line, ( ( field == initialAltitudeTextField ) ? "initial" : "expected" ) )
         let     fieldLength = field.text!.lengthOfBytes( using: String.Encoding.ascii )
         
-        
         switch( fieldLength )
         {
             case 1:    field.text = field.text! + "000";    break
@@ -789,7 +774,6 @@ class ClearedToiPadViewController: UIViewController,
         {
             let     initialAltitude :Int? = Int( initialAltitudeTextField .text! )
             let     expectedAltitude:Int? = Int( expectedAltitudeTextField.text! )
-            
             
             if ( expectedAltitude! < initialAltitude! )
             {
@@ -807,16 +791,13 @@ class ClearedToiPadViewController: UIViewController,
         let     fieldText   = departureFrequencyTextField.text!
         let     fieldLength = fieldText.lengthOfBytes( using: String.Encoding.ascii )
         
-        
         if ( 3 > fieldLength )
         {
             // We don't really know what we should do with this, so just leave it alone
             return
         }
         
-        
         let     range = fieldText.rangeOfCharacter( from: CharacterSet.init( charactersIn: "." ) )
-        
         
         // Does the string already have a decimal point?
         if nil == range
@@ -861,8 +842,6 @@ class ClearedToiPadViewController: UIViewController,
         let     inPortraitModeNow = ( ( UIInterfaceOrientation.portrait == orientation ) || ( UIInterfaceOrientation.portraitUpsideDown == orientation ) )
         let     useBigButtons     = ( inPortraitModeNow || ( !inPortraitModeNow && !keyboardIsVisible ) )
 //        NSLog( "%@:%@[%d] - inPortraitModeNow[ %@ ]  useBigButtons[ %@ ]", description(), #function, #line, stringForBool( boolValue: inPortraitModeNow ), stringForBool( boolValue: useBigButtons ) )
-
-        
 
         smallAsFiledButton                .isHidden = useBigButtons
         smallClearanceVoidTimeButton      .isHidden = useBigButtons
@@ -920,7 +899,6 @@ class ClearedToiPadViewController: UIViewController,
     {
         let     emptyFieldsPresent = ( GlobalConstants.NO_SELECTION != firstEmptyField() )
 
-        
 //        NSLog( "%@:%@[%d] - %@ ", description(), #function, #line, String( format: "emptyFieldsPresent[ %@ ]", stringForBool( boolValue: emptyFieldsPresent ) ) )
         saveBarButtonItem.isEnabled = !emptyFieldsPresent
     }
@@ -958,7 +936,6 @@ class ClearedToiPadViewController: UIViewController,
     {
         var emptyFieldName = String.init()
         
-        
         switch( firstEmptyField() )
         {
         case GlobalConstants.Clearances.eDepartureAirport:       emptyFieldName = "Departure Airport";        break;
@@ -978,10 +955,8 @@ class ClearedToiPadViewController: UIViewController,
         {
             let     errorMessage = "The " + emptyFieldName + " field cannot be left blank"
             
-            
             NSLog( "%@:%@[%d] - %@ [ false ] - %@", description(), #function, #line, errorMessage )
             presentAlert( title: "Save Clearance Error", message: errorMessage )
-            
             return false;
         }
         
@@ -1054,13 +1029,11 @@ class ClearedToiPadViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let     recentClearances = UserDefaults.standard.array( forKey: GlobalConstants.UserDefaults.KEY_RECENT_CLEARANCES ) as? [[String]]
         
-        
         resetControls()
         
         if nil != recentClearances
         {
             let     lastClearance = recentClearances?[0];
-            
             
             departureAirportButton  .setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDepartureAirport,   clearance: lastClearance! ), for: UIControlState.normal )
             destinationAirportButton.setTitle( titleForElement( itemIndex: GlobalConstants.Clearances.eDestinationAirport, clearance: lastClearance! ), for: UIControlState.normal )
@@ -1086,7 +1059,6 @@ class ClearedToiPadViewController: UIViewController,
         if ( inNavigationController )
         {
             let     navigationController = UINavigationController.init( rootViewController: viewController )
-            
             
             navigationController.modalPresentationStyle = .popover
             
@@ -1144,11 +1116,9 @@ class ClearedToiPadViewController: UIViewController,
         let     storyboard     = UIStoryboard.init( name: "MainStoryboard_iPad", bundle: nil )
         let     viewController = storyboard.instantiateViewController( withIdentifier: storyboardId )
         
-        
         if storyboardId == STORYBOARD_ID_AIRCRAFT
         {
             let     vc = viewController as! AircraftViewController
-            
             
             vc.delegate     = self
             vc.fromSettings = false
@@ -1157,14 +1127,12 @@ class ClearedToiPadViewController: UIViewController,
         {
             let     vc = viewController as! AirportsViewController
             
-            
             vc.delegate    = self
             vc.displayMode = airportsMode
         }
         else if storyboardId == STORYBOARD_ID_AIRPORT_DEPARTURES
         {
             let     vc = viewController as! AirportDeparturesViewController
-
 
             vc.delegate                  = self
             vc.departureAirport          = departureAirportButton.title( for: UIControlState.normal )
@@ -1174,13 +1142,11 @@ class ClearedToiPadViewController: UIViewController,
         {
             let     vc = viewController as! HeadingViewController
             
-            
             vc.delegate = self
         }
         else if storyboardId == STORYBOARD_ID_WELCOME
         {
             let     vc = viewController as! WelcomeViewController
-            
             
             vc.delegate         = self
             vc.dismissWithTimer = true
@@ -1189,34 +1155,4 @@ class ClearedToiPadViewController: UIViewController,
         return viewController
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }

@@ -60,7 +60,9 @@ class AirportsViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector( plusButtonTapped ) )
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+                                                                  target: self,
+                                                                  action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize( width: 240, height: 400 )
 
         airportExtArray.initWithName( nameOfArray: "Airports",
@@ -72,7 +74,7 @@ class AirportsViewController: UIViewController,
             case AirportModes.eShowDeparture:       title = "Departure";        break
             case AirportModes.eShowDestination:     title = "Destination";      break
             
-            default:    title = "Airports"      // eShowSettings
+            default:    title = "Airports"      // AirportModes.eShowSettings
         }
         
     }
@@ -101,11 +103,15 @@ class AirportsViewController: UIViewController,
         {
             if AirportModes.eShowDeparture == displayMode
             {
-                delegate?.airportsViewController( airportsViewController: self, didSelectDeparture: true, fromAirport: airportExtArray.selectedElement() )
+                delegate?.airportsViewController( airportsViewController: self,
+                                                  didSelectDeparture: true,
+                                                  fromAirport: airportExtArray.selectedElement() )
             }
             else if AirportModes.eShowDestination == displayMode
             {
-                delegate?.airportsViewController( airportsViewController: self, didSelectDestination: true, toAirport: airportExtArray.selectedElement() )
+                delegate?.airportsViewController( airportsViewController: self,
+                                                  didSelectDestination: true,
+                                                  toAirport: airportExtArray.selectedElement() )
             }
 
         }
@@ -192,7 +198,6 @@ class AirportsViewController: UIViewController,
     {
         let     cell = tableView.dequeueReusableCell( withIdentifier: CellIdentifier, for: indexPath )
         
-        
         cell.textLabel?.text = airportExtArray.elementAt( index:  indexPath.row )
         cell.accessoryType   = UITableViewCellAccessoryType.none
         
@@ -275,9 +280,5 @@ class AirportsViewController: UIViewController,
     {
         return "AirportViewController"
     }
-    
-    
-    
-
     
 }

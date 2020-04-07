@@ -37,9 +37,7 @@ class SettingsViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         super.viewDidLoad()
         
-        
         let     aboutButton = UIButton.init( type: UIButtonType.infoLight )
-        
         
         title = "Settings"
         aboutButton.addTarget( self, action: #selector( aboutButtonTouched ), for: UIControlEvents.touchUpInside )
@@ -74,7 +72,6 @@ class SettingsViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let    vc = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_WELCOME )
         
-        
         navigationController?.pushViewController( vc, animated: true )
     }
     
@@ -93,10 +90,8 @@ class SettingsViewController: UIViewController,
                     cellForRowAt indexPath: IndexPath ) -> UITableViewCell
     {
         let     cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
-
         
         cell.textLabel?.text = cellTitleArray[indexPath.row]
-        
         return cell
     }
     
@@ -109,7 +104,6 @@ class SettingsViewController: UIViewController,
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let     vc = viewControllerWithStoryboardId( storyboardId: storyboardIdArray[indexPath.row] )
-        
         
         tableView.deselectRow( at: indexPath, animated: true )
         navigationController?.pushViewController( vc, animated: true )
@@ -131,11 +125,9 @@ class SettingsViewController: UIViewController,
         let     storyboard     = UIStoryboard.init( name: "MainStoryboard_iPad", bundle: nil )
         let     viewController = storyboard.instantiateViewController( withIdentifier: storyboardId )
         
-        
         if storyboardId == STORYBOARD_ID_AIRCRAFT
         {
             let     vc = viewController as! AircraftViewController
-
 
             vc.fromSettings = true
         }
@@ -143,13 +135,11 @@ class SettingsViewController: UIViewController,
         {
             let     vc = viewController as! AirportsViewController
 
-
             vc.displayMode = AirportModes.eShowSettings
         }
         else if storyboardId == STORYBOARD_ID_DEPARTURES
         {
             let     vc = viewController as! DepartureViewController
-
 
             vc.fromSettings = true
         }
@@ -157,17 +147,10 @@ class SettingsViewController: UIViewController,
         {
             let     vc = viewController as! WelcomeViewController
             
-            
             vc.dismissWithTimer = false
         }
         
         return viewController
     }
-    
-    
-    
-
-    
-    
     
 }

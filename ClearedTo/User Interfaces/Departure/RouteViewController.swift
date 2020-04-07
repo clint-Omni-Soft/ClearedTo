@@ -195,9 +195,7 @@ class RouteViewController: UIViewController,
             return
         }
         
-        
         var     indexOfSpace = GlobalConstants.NO_SELECTION
-        
         
         for index in ( 1...( myRouteTextView.text.count - 2 ) ).reversed()
         {
@@ -370,7 +368,6 @@ class RouteViewController: UIViewController,
     {
         var     shouldChangeText = true
     
-    
         if text == "\n"
         {
             deleteWordButton.isHidden = ( 0 == myRouteTextView.text.count )
@@ -390,7 +387,6 @@ class RouteViewController: UIViewController,
     {
         let     stringLength = myRouteTextView.text.count
     
-    
         if 0 != stringLength
         {
             if ( " " != ( myRouteTextView.text as NSString ).substring( to: stringLength - 1 ) )
@@ -404,9 +400,7 @@ class RouteViewController: UIViewController,
         deleteWordButton.isHidden   = false
         lastButtonTouchWasDeparture = false
     
-    
         let     overflow = myRouteTextView.contentSize.height - myRouteTextView.frame.size.height
-    
         
             // Although we'll let the user scroll around in our text view,
             // we want the last line to always be displayed after he hits a soft-key
@@ -428,7 +422,6 @@ class RouteViewController: UIViewController,
         let     cancelBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector( cancelBarButtonItemTouched ) )
         let     clearBarButtonItem  = UIBarButtonItem.init( title: "Clear", style: UIBarButtonItemStyle.plain, target: self, action: #selector( clearBarButtonItemTouched  ) )
 
-        
         navigationItem.rightBarButtonItems = [clearBarButtonItem, cancelBarButtonItem]
     }
     
@@ -444,7 +437,6 @@ class RouteViewController: UIViewController,
         if segue.identifier == SEGUE_AIRPORT_DEPARTURES
         {
             let     vcDeparture: AirportDeparturesViewController = segue.destination as! AirportDeparturesViewController
-
 
             vcDeparture.delegate                  = self;
             vcDeparture.useLastDepartureSelection = lastButtonTouchWasDeparture;
@@ -462,14 +454,10 @@ class RouteViewController: UIViewController,
         {
             let     vcHeading: HeadingViewController = segue.destination as! HeadingViewController
 
-
             vcHeading.delegate = self
             segueInProgress    = true
         }
         
     }
-    
-    
-    
     
 }

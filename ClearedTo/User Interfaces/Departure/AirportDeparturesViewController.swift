@@ -58,7 +58,10 @@ class AirportDeparturesViewController: UIViewController,
         super.viewDidLoad()
 
         title = String( format: "%@ Departures", departureAirport )
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector( plusButtonTapped ) )
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+                                                                  target: self,
+                                                                  action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize(width: 240, height: 400 )
 
         departuresForAirportKey = String( format: "%@.%@", GlobalConstants.UserDefaults.KEY_DEPARTURES, departureAirport )
@@ -93,7 +96,6 @@ class AirportDeparturesViewController: UIViewController,
         {
             let     selection = departureExtArray.selectedElement()
             
-            
             UserDefaults.standard.removeObject(   forKey: GlobalConstants.UserDefaults.KEY_LAST_DEPARTURE )
             UserDefaults.standard.set( selection, forKey: GlobalConstants.UserDefaults.KEY_LAST_DEPARTURE )
             
@@ -101,11 +103,14 @@ class AirportDeparturesViewController: UIViewController,
 
             if transitionSelected
             {
-                delegate?.airportDeparturesViewController( airportDeparturesViewController: self, didSelectDeparture: selection, withTransistion: transition )
+                delegate?.airportDeparturesViewController( airportDeparturesViewController: self,
+                                                           didSelectDeparture: selection,
+                                                           withTransistion: transition )
             }
             else
             {
-                delegate?.airportDeparturesViewController( airportDeparturesViewController: self, didSelectDeparture: selection )
+                delegate?.airportDeparturesViewController( airportDeparturesViewController: self,
+                                                           didSelectDeparture: selection )
             }
 
         }
@@ -123,7 +128,8 @@ class AirportDeparturesViewController: UIViewController,
     
     // MARK: DepartureViewControllerDelegate Methods
     
-    func departureViewController( departureViewController: DepartureViewController, didSelectDeparture: String )
+    func departureViewController( departureViewController: DepartureViewController,
+                                  didSelectDeparture: String )
     {
         NSLog( "%@:%@[%d] - [ %@ ]", description(), #function, #line, didSelectDeparture )
         departureExtArray.addString( newString: didSelectDeparture )
@@ -139,7 +145,9 @@ class AirportDeparturesViewController: UIViewController,
     }
     
     
-    func departureViewController( departureViewController: DepartureViewController, didSelectDeparture: String, withTransition: String )
+    func departureViewController( departureViewController: DepartureViewController,
+                                  didSelectDeparture: String,
+                                  withTransition: String )
     {
         NSLog( "%@:%@[%d] - [ %@ ][ %@ ]", description(), #function, #line, didSelectDeparture, withTransition )
         departureExtArray.addString( newString: didSelectDeparture )
@@ -158,7 +166,8 @@ class AirportDeparturesViewController: UIViewController,
     
     // MARK: TransitionViewControllerDelegate Methods
 
-    func transitionsViewController( sender: TransitionsViewController, didSelectTransition: String )
+    func transitionsViewController( sender: TransitionsViewController,
+                                    didSelectTransition: String )
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, didSelectTransition )
         transition         = didSelectTransition
@@ -176,7 +185,6 @@ class AirportDeparturesViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_DEPARTURES )
 
-        
         navigationController?.pushViewController( myViewController, animated: true )
     }
     
@@ -195,7 +203,6 @@ class AirportDeparturesViewController: UIViewController,
                     cellForRowAt indexPath: IndexPath ) -> UITableViewCell
     {
         let         cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
-        
         
 //        NSLog( "%@:%@[%d] - selectedElement[ %d ]", description(), #function, #line, departureExtArray.indexOfSelectedElement )
 
@@ -244,7 +251,6 @@ class AirportDeparturesViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         let         myViewController: UIViewController = viewControllerWithStoryboardId( storyboardId: STORYBOARD_ID_TRANSITIONS )
         
-        
         navigationController?.pushViewController( myViewController, animated: true )
     }
     
@@ -253,7 +259,6 @@ class AirportDeparturesViewController: UIViewController,
                     didSelectRowAt indexPath: IndexPath )
     {
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
-        
         departureExtArray.indexOfSelectedElement = ( ( departureExtArray.indexOfSelectedElement == indexPath.row ) ? GlobalConstants.NO_SELECTION : indexPath.row )
         
         tableView.reloadData()
@@ -276,7 +281,6 @@ class AirportDeparturesViewController: UIViewController,
         {
             let     lastDeparture = UserDefaults.standard.string( forKey: GlobalConstants.UserDefaults.KEY_LAST_DEPARTURE )
             
-            
             if nil != lastDeparture
             {
                 departureExtArray.selectElementWithName( elementName: lastDeparture! )
@@ -286,7 +290,6 @@ class AirportDeparturesViewController: UIViewController,
         else
         {
             UserDefaults.standard.removeObject( forKey: GlobalConstants.UserDefaults.KEY_LAST_DEPARTURE )
-
             UserDefaults.standard.synchronize()
         }
     
@@ -309,11 +312,9 @@ class AirportDeparturesViewController: UIViewController,
         let     storyboard     = UIStoryboard.init( name: "MainStoryboard_iPad", bundle: nil )
         let     viewController = storyboard.instantiateViewController( withIdentifier: storyboardId )
         
-        
         if storyboardId == STORYBOARD_ID_DEPARTURES
         {
             let     vc = viewController as! DepartureViewController
-            
             
             vc.delegate     = self
             vc.fromSettings = false
@@ -323,7 +324,6 @@ class AirportDeparturesViewController: UIViewController,
         else if storyboardId == STORYBOARD_ID_TRANSITIONS
         {
             let     vc = viewController as! TransitionsViewController
-            
             
             vc.delegate               = self
             vc.departureName          = departureExtArray.selectedElement()
@@ -337,6 +337,5 @@ class AirportDeparturesViewController: UIViewController,
         
         return viewController
     }
-    
     
 }

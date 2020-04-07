@@ -49,7 +49,9 @@ class TransitionsViewController: UIViewController,
         super.viewDidLoad()
 
         title = departureName
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector( plusButtonTapped ) )
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+                                                                  target: self,
+                                                                  action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize( width: 240, height: 400 )
         
         transitionsExtArray.initWithName( nameOfArray: "Transitions",
@@ -165,7 +167,6 @@ class TransitionsViewController: UIViewController,
     {
         let     cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
         
-        
         cell.textLabel?.text = transitionsExtArray.elementAt( index: indexPath.row )
         cell.accessoryType   = UITableViewCellAccessoryType.none
         
@@ -259,9 +260,4 @@ class TransitionsViewController: UIViewController,
         return "TransitionsViewController"
     }
     
-
-    
-    
-
-
 }

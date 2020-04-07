@@ -27,7 +27,10 @@ class ExtArray: NSObject
     
     // MARK: Initializaton Methods
 
-    func initWithName( nameOfArray: String, lengthMinimum: Int, keyForNotification: String, keyForUserDefault: String )
+    func initWithName( nameOfArray: String,
+                       lengthMinimum: Int,
+                       keyForNotification: String,
+                       keyForUserDefault: String )
     {
         arrayName               = nameOfArray
         indexOfSelectedElement  = GlobalConstants.NO_SELECTION
@@ -44,7 +47,6 @@ class ExtArray: NSObject
     func addString( newString: String )
     {
         var     newArray = [String]()
-        
         
         if nil == myArray
         {
@@ -165,7 +167,6 @@ class ExtArray: NSObject
         var     errorMsg:       String!
         let     range = elementName.rangeOfCharacter( from: CharacterSet.init( charactersIn: " ~`!@#$%^&*()-_=+|}{[]:;'<>?/.,\"\\" ) )
         
-        
         if minimumLength > elementName.count
         {
             errorMsg = String( format: "%@ name must be at least %d characters long!", arrayName, minimumLength )
@@ -182,7 +183,7 @@ class ExtArray: NSObject
                 {
                     if element == elementName
                     {
-                        errorMsg = String( format: "That %@ name is already in the list!  Try again", arrayName )
+                        errorMsg = String( format: "'%@' is already in the list!  Try again", arrayName )
                         break
                     }
                     
@@ -247,6 +248,5 @@ class ExtArray: NSObject
         }
         
     }
-    
     
 }

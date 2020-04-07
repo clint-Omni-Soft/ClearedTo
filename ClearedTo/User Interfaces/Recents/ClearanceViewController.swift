@@ -45,9 +45,8 @@ class ClearanceViewController: UIViewController
         
         if let object = UserDefaults.standard.object( forKey: GlobalConstants.UserDefaults.KEY_RECENT_CLEARANCES )
         {
-            var     recentClearancesArray = [[String]].init( object as! [[String]] )
+            let     recentClearancesArray = [[String]].init( object as! [[String]] )
             let     clearance             = recentClearancesArray[ selectedClearance ]
-            
             
             aircraftLabel               .text = clearance[GlobalConstants.Clearances.eTailNumber            ]
             dateLabel                   .text = clearance[GlobalConstants.Clearances.eDateTime              ]
@@ -80,9 +79,5 @@ class ClearanceViewController: UIViewController
     {
         return "ClearanceViewController"
     }
-    
-    
-
-
 
 }

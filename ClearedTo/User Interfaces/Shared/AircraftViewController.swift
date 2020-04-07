@@ -46,8 +46,9 @@ class AircraftViewController: UIViewController,
 
         title = "Aircraft"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector( plusButtonTapped ) )
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init( barButtonSystemItem: UIBarButtonSystemItem.add,
+                                                                  target: self,
+                                                                  action: #selector( plusButtonTapped ) )
         preferredContentSize = CGSize( width: 240, height: 400 )
         
         aircraftExtArray.initWithName( nameOfArray:         "Aircraft",
@@ -163,7 +164,6 @@ class AircraftViewController: UIViewController,
     {
         let     cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
         
-        
         cell.textLabel?.text = aircraftExtArray.elementAt( index: indexPath.row )
         cell.accessoryType   = UITableViewCellAccessoryType.none
 
@@ -247,10 +247,4 @@ class AircraftViewController: UIViewController,
         return "AircraftViewController"
     }
     
-
-    
-    
-
-
-
 }

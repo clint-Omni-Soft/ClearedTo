@@ -154,7 +154,6 @@ class HeadingViewController: UIViewController
     {
         let     roundedValue: Int = Int( sliderBar.value / 10.0 )
         
-        
         headingLabel.text = String( format: "%03d", (10 * roundedValue) )
         
         userDidSetHeading = true
@@ -170,13 +169,5 @@ class HeadingViewController: UIViewController
         userDidSetHeading = true
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, headingLabel.text! )
   }
-    
-    
-    
-    
-    
-    
-    
-    
     
 }

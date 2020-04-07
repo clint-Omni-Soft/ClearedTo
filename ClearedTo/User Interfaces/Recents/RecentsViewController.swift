@@ -77,7 +77,6 @@ class RecentsViewController: UIViewController,
     {
         var     count = 0
         
-        
         if nil != recentClearances
         {
             count = recentClearances!.count
@@ -91,8 +90,7 @@ class RecentsViewController: UIViewController,
                     cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let     cell      = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
-        var     clearance = recentClearances![indexPath.row]
-        
+        let     clearance = recentClearances![indexPath.row]
         
         cell.detailTextLabel?.text = clearance[GlobalConstants.Clearances.eDateTime]
         cell.textLabel?      .text = String( format: "%@ - %@ in %@", clearance[GlobalConstants.Clearances.eDepartureAirport  ],
@@ -140,11 +138,9 @@ class RecentsViewController: UIViewController,
         NSLog( "%@:%@[%d] - %@", description(), #function, #line, "" )
         tableView.deselectRow( at: indexPath,
                                animated: true )
-
         
         let     storyboard     = UIStoryboard.init( name: "MainStoryboard_iPad", bundle: nil )
         let     viewController = storyboard.instantiateViewController( withIdentifier: STORYBOARD_ID_CLEARANCE ) as! ClearanceViewController
- 
     
         selectedClearance = indexPath.row
         viewController.selectedClearance = selectedClearance
@@ -180,7 +176,6 @@ class RecentsViewController: UIViewController,
         {
             var newClearancesArray : [[String]] = recentClearances!
             
-            
             newClearancesArray.remove( at: index )
             
             UserDefaults.standard.removeObject(forKey: GlobalConstants.UserDefaults.KEY_RECENT_CLEARANCES )
@@ -189,7 +184,7 @@ class RecentsViewController: UIViewController,
             UserDefaults.standard.set( newClearancesArray, forKey: GlobalConstants.UserDefaults.KEY_RECENT_CLEARANCES )
         }
         
-        UserDefaults.standard.synchronize
+        UserDefaults.standard.synchronize()
         
         recentClearances = UserDefaults.standard.array( forKey: GlobalConstants.UserDefaults.KEY_RECENT_CLEARANCES ) as? [[String]]
     }
@@ -199,10 +194,5 @@ class RecentsViewController: UIViewController,
     {
         return "RecentsViewController"
     }
-    
-
-    
-
-
     
 }

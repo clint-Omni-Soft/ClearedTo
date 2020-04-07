@@ -19,7 +19,6 @@ extension UIViewController
         let     alert    = UIAlertController.init( title: title, message: message, preferredStyle: UIAlertControllerStyle.alert )
         let     okAction = UIAlertAction.init( title: "OK", style: UIAlertActionStyle.default, handler: nil )
         
-        
         alert.addAction( okAction )
         
         present( alert, animated: true, completion: nil )
