@@ -3,7 +3,7 @@
 //  ClearedTo
 //
 //  Created by Clint Shank on 2/5/18.
-//  Copyright © 2018 Omni-Soft, Inc. All rights reserved.
+//  Copyright © 2022 Omni-Soft, Inc. All rights reserved.
 //
 
 
@@ -20,7 +20,7 @@ struct AirportModes
 
 
 
-protocol AirportsViewControllerDelegate: class
+protocol AirportsViewControllerDelegate: AnyObject
 {
     func airportsViewController( airportsViewController: AirportsViewController,
                                  didSelectDeparture: Bool,

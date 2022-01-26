@@ -3,7 +3,7 @@
 //  ClearedTo
 //
 //  Created by Clint Shank on 1/30/18.
-//  Copyright © 2018 Omni-Soft, Inc. All rights reserved.
+//  Copyright © 2022 Omni-Soft, Inc. All rights reserved.
 //
 
 import UIKit

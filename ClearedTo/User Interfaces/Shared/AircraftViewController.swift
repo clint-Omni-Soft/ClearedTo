@@ -3,7 +3,7 @@
 //  ClearedTo
 //
 //  Created by Clint Shank on 2/2/18.
-//  Copyright © 2018 Omni-Soft, Inc. All rights reserved.
+//  Copyright © 2022 Omni-Soft, Inc. All rights reserved.
 //
 
 
@@ -11,7 +11,7 @@ import UIKit
 
 
 
-protocol AircraftViewControllerDelegate: class
+protocol AircraftViewControllerDelegate: AnyObject
 {
     func aircraftViewController( aircraftViewController: AircraftViewController,
                                  didSelectAircraft: Bool,
